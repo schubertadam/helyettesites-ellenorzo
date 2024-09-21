@@ -6,6 +6,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formataddr
 from smtplib import SMTP_SSL
+from typing import Any
 
 logging.basicConfig(filename='error.log', level=logging.ERROR, format='%(asctime)s %(levelname)s: %(message)s')
 
@@ -61,10 +62,10 @@ def write_file(path: str, data: [any, any], data_type: str = '') -> None:
         else:
             file.write(data)
 
-def read_file(path: str, data_type: str = '') -> str | [any, any]:
+def read_file(path: str, data_type: str = '') -> str | Any:
     if os.path.exists(path):
         with open(path, 'r', encoding='utf-8') as file:
-            if data_type == '':
+            if data_type == 'json':
                 return json.load(file)
             else:
                 return file.read()
