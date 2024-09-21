@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 import smtplib
@@ -52,3 +53,19 @@ def send_email(server: SMTP_SSL|None,subject: str, body: str, recipient: str) ->
         return False
 
     return True
+
+def write_file(path: str, data: [any, any], data_type: str = '') -> None:
+    with open(path, 'w', encoding='utf-8') as file:
+        if data_type == 'json':
+            json.dump(data, file, indent=4)
+        else:
+            file.write(data)
+
+def read_file(path: str, data_type: str = '') -> str | [any, any]:
+    if os.path.exists(path):
+        with open(path, 'r', encoding='utf-8') as file:
+            if data_type == '':
+                return json.load(file)
+            else:
+                return file.read()
+    return None
