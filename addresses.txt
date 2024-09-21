@@ -1,0 +1,12 @@
+{
+    "7a": [
+        "email1",
+        "email2",
+        "email3"
+    ],
+    "7b": [
+        "email1",
+        "email2",
+        "email3"
+    ]
+}
