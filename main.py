@@ -1,15 +1,18 @@
 import os
+from typing import Dict, Any
+
 import requests
 import re
 import json
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
-def get_table_data(element, css_class):
+
+def get_table_data(element: Tag, css_class: str) -> str:
     return element.find('div', {'class': css_class}).get_text(strip=True)
 
 # Retrieve table data from website's table
-def get_table():
+def get_table() -> dict[Any, Any] | None:
     website = requests.get('https://szigbp.edupage.org/substitution').text
 
     table_data = re.search(r'"report_html":"((?:[^"\\]|\\.)*)"', website, re.DOTALL)
